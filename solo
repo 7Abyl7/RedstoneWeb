@@ -1,1 +1,610 @@
-cout>>hola
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Redstone - Minecraft</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Google Fonts (Estilo Minecraft) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* * Paleta de colores y fuentes basadas en el PDF
+         * Fuentes: 'Press Start 2P' (Títulos), 'VT323' (Cuerpo)
+         * Colores:
+         * --mc-dark-red: #aa1515
+         * --mc-bright-red: #e01111
+         * --mc-medium-grey: #adabab
+         * --mc-dark-grey: #483a3a
+         * --mc-light-bg: #efe0e0 (rgb(239, 224, 224))
+         * --mc-white: #ffffff
+         */
+        
+         :root {
+            --mc-dark-red: #aa1515;
+            --mc-bright-red: #e01111;
+            --mc-medium-grey: #adabab;
+            --mc-dark-grey: #483a3a;
+            --mc-light-bg: #efe0e0;
+            --mc-white: #ffffff;
+            --mc-font-heading: 'Press Start 2P', cursive;
+            --mc-font-body: 'VT323', monospace;
+        }
+        
+        body {
+            font-family: var(--mc-font-body);
+            background-color: var(--mc-light-bg);
+            color: var(--mc-dark-grey);
+            font-size: 1.5rem;
+            /* La fuente VT323 es pequeña, la agrandamos */
+            line-height: 1.6;
+        }
+        /* Estilos de fuentes principales */
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .navbar-brand,
+        .nav-link,
+        .btn,
+        .dropdown-item,
+        .accordion-button,
+        .form-label {
+            font-family: var(--mc-font-heading);
+            color: var(--mc-dark-grey);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        /* Estilo pixelado para bordes */
+        
+        .pixel-border {
+            border: 4px solid var(--mc-dark-grey);
+            box-shadow: 6px 6px 0 var(--mc-medium-grey);
+            background-color: var(--mc-white);
+        }
+        /* --- 1. Página de Inicio de Sesión (Login) --- */
+        
+        #login-view {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-card {
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem;
+        }
+        
+        .login-card h2 {
+            font-size: 1.5rem;
+            text-align: center;
+            color: var(--mc-dark-red);
+        }
+        
+        .form-control {
+            font-family: var(--mc-font-body);
+            font-size: 1.2rem;
+            border: 2px solid var(--mc-dark-grey);
+        }
+        
+        .form-control:focus {
+            border-color: var(--mc-dark-red);
+            box-shadow: 0 0 10px var(--mc-bright-red);
+        }
+        
+        .btn-mc {
+            font-family: var(--mc-font-heading);
+            background-color: var(--mc-dark-red);
+            color: var(--mc-white);
+            border: 2px solid var(--mc-dark-grey);
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-mc:hover {
+            background-color: var(--mc-bright-red);
+            color: var(--mc-white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 0 var(--mc-dark-grey);
+        }
+        /* --- 2. Página Principal (Main View) --- */
+        /* Navbar (Header) */
+        
+        .navbar-mc {
+            /* Textura de piedra de Minecraft */
+            background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/stone-wall.png');
+            background-repeat: repeat;
+            border-bottom: 6px solid var(--mc-dark-grey);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        .navbar-brand {
+            font-size: 1.2rem;
+            color: var(--mc-dark-red);
+        }
+        
+        .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-link {
+            font-size: 0.8rem;
+            color: var(--mc-dark-grey);
+        }
+        
+        .nav-link.active,
+        .nav-link:hover {
+            color: var(--mc-dark-red);
+        }
+        
+        .dropdown-menu {
+            background-color: var(--mc-light-bg);
+            border: 2px solid var(--mc-dark-grey);
+            font-family: var(--mc-font-heading);
+        }
+        
+        .dropdown-item {
+            font-size: 0.8rem;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--mc-dark-red);
+            color: var(--mc-white);
+        }
+        /* Contenedor principal del contenido */
+        
+        #main-content {
+            padding: 2rem 0;
+        }
+        /* --- 2a. Sección "Guías de Mecanismos" (Barra roja) --- */
+        
+        .guides-header {
+            background-color: var(--mc-dark-red);
+            color: var(--mc-white);
+            padding: 1rem;
+            border-top: 4px solid var(--mc-dark-grey);
+            border-bottom: 4px solid var(--mc-dark-grey);
+            text-align: center;
+        }
+        
+        .guides-header h3 {
+            color: var(--mc-white);
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        /* Navegación lateral (Sidebar) */
+        
+        .sidebar-nav .list-group-item {
+            font-family: var(--mc-font-heading);
+            font-size: 1rem;
+            background-color: var(--mc-white);
+            border: 2px solid var(--mc-dark-grey);
+            margin-bottom: 0.5rem;
+            color: var(--mc-dark-grey);
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .sidebar-nav .list-group-item:hover,
+        .sidebar-nav .list-group-item.active {
+            background-color: var(--mc-medium-grey);
+            color: var(--mc-white);
+        }
+        /* Área de contenido principal (Home, Bloques, Mecanismos) */
+        
+        .content-area {
+            padding: 1.5rem;
+        }
+        
+        .content-area h2 {
+            color: var(--mc-dark-red);
+            border-bottom: 4px solid var(--mc-medium-grey);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-area img {
+            border: 2px solid var(--mc-dark-grey);
+            max-width: 100%;
+            height: auto;
+        }
+        /* --- 2c. Estilo Acordeón (Mecanismos) --- */
+        
+        .accordion-item {
+            background-color: var(--mc-white);
+            border: 2px solid var(--mc-dark-grey);
+            margin-bottom: 1rem;
+        }
+        
+        .accordion-button {
+            font-size: 1rem;
+            background-color: var(--mc-medium-grey);
+            color: var(--mc-dark-grey);
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: var(--mc-dark-red);
+            color: var(--mc-white);
+            box-shadow: none;
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border: none;
+        }
+        
+        .accordion-button::after {
+            /* Personalizar flecha de acordeón */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23483a3a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+        
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+        
+        .accordion-body img {
+            margin-bottom: 1rem;
+        }
+        /* --- 2b. Estilo Página de Bloques --- */
+        
+        .block-entry {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Contenedor principal de la aplicación -->
+    <div id="app">
+        <!-- El contenido se renderizará aquí por JavaScript -->
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Lógica de la aplicación (Navegación y Vistas) -->
+    <script>
+        const app = document.getElementById('app');
+
+        // --- PLANTILLAS HTML (Vistas) ---
+
+        /**
+         * Plantilla para la vista de Inicio de Sesión
+         * Basado en la Maqueta de la Página 9
+         */
+        const loginViewTemplate = `
+            <div id="login-view">
+                <div class="login-card pixel-border">
+                    <div class="text-center mb-4">
+                        <img src="https://placehold.co/150x150/aa1515/efe0e0?text=Bloque+Redstone" alt="Logo Redstone" class="img-fluid">
+                    </div>
+                    <h2 class="mb-4">INICIAR SESION</h2>
+                    <form>
+                        <div class="mb-3">
+                            <label for="username" class="form-label" style="font-size: 0.9rem;">Nombre de Usuario:</label>
+                            <input type="text" class="form-control" id="username" placeholder="Introduce tu usuario">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label" style="font-size: 0.9rem;">Contraseña:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña">
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="button" class="btn btn-mc" onclick="navigateTo('main')">INGRESAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        `;
+
+        /**
+         * Plantilla para la vista principal (Navbar + Contenedor de contenido)
+         * Basado en la Maqueta de la Página 10
+         */
+        const mainViewTemplate = `
+            <nav id="main-navbar" class="navbar navbar-expand-lg navbar-mc">
+                <div class="container">
+                    <a class="navbar-brand" href="#" onclick="navigateTo('main', 'home')">
+                        <img src="https://placehold.co/100x100/aa1515/efe0e0?text=LOGO" alt="Logo">
+                        GUIA REDSTONE
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="navigateTo('main', 'home')">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="navigateTo('main', 'bloques')">Bloques</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="mechanismsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Mecanismos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="mechanismsDropdown">
+                                    <li><a class="dropdown-item" href="#" onclick="navigateTo('main', 'mecanismos', 'principiante')">Principiantes</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="navigateTo('main', 'mecanismos', 'medio')">Intermedios</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="navigateTo('main', 'mecanismos', 'experto')">Expertos</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="navigateTo('login')">Cerrar Sesión</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <main id="main-content" class="container mt-4">
+                <div class="row">
+                    <!-- Columna de Navegación Lateral (Sidebar) -->
+                    <div class="col-lg-3">
+                        <div class="guides-header mb-3">
+                            <h3>GUIAS DE MECANISMOS</h3>
+                        </div>
+                        <div class="list-group sidebar-nav">
+                            <a class="list-group-item" onclick="navigateTo('main', 'bloques')">BLOQUES</a>
+                            <a class="list-group-item" onclick="navigateTo('main', 'mecanismos', 'principiante')">BASICOS</a>
+                            <a class="list-group-item" onclick="navigateTo('main', 'mecanismos', 'medio')">MEDIOS</a>
+                            <a class="list-group-item" onclick="navigateTo('main', 'mecanismos', 'experto')">EXPERTOS</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Área de contenido principal (se rellena dinámicamente) -->
+                    <div class="col-lg-9">
+                        <div id="content-area" class="content-area pixel-border">
+                            <!-- El contenido de la sub-página se insertará aquí -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        `;
+
+        /**
+         * Contenido para la página de "Inicio"
+         * Basado en la Maqueta de la Página 10
+         */
+        const homeContent = `
+            <h2>INFORMACION BASICA DE REDSTONE</h2>
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel.</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://placehold.co/600x400/483a3a/efe0e0?text=Redstone" alt="Redstone en Minecraft" class="img-fluid">
+                </div>
+            </div>
+        `;
+
+        /**
+         * Contenido para la página de "Bloques"
+         * Basado en la Maqueta de la Página 11
+         */
+        const bloquesContent = `
+            <h2>INFORMACION SOBRE BLOQUES</h2>
+            
+            <!-- Entrada de Bloque 1 -->
+            <div class="block-entry">
+                <h3>INFORMACION SOBRE EL BLOQUE: ANTORCHA DE REDSTONE</h3>
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="https://placehold.co/400x300/483a3a/efe0e0?text=Antorcha" alt="Antorcha de Redstone" class="img-fluid">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Img1" class="img-fluid"></div>
+                    <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Img2" class="img-fluid"></div>
+                    <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Img3" class="img-fluid"></div>
+                    <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Img4" class="img-fluid"></div>
+                </div>
+            </div>
+            
+            <hr style="border-top: 4px solid var(--mc-medium-grey);">
+
+            <!-- Entrada de Bloque 2 -->
+            <div class="block-entry mt-4">
+                <h3>INFORMACION SOBRE EL BLOQUE: REPETIDOR</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="https://placehold.co/400x300/483a3a/efe0e0?text=Repetidor" alt="Repetidor de Redstone" class="img-fluid mb-3">
+                    </div>
+                    <div class="col-md-8">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        /**
+         * Contenido para la página de "Mecanismos" (Acordeón)
+         * Basado en la Maqueta de las Páginas 12-14
+         * Esta función genera el HTML dinámicamente.
+         */
+        function getMecanismosContent(level) {
+            let title = "MECANISMOS";
+            if (level === 'principiante') title = "MECANISMOS PARA PRINCIPIANTES";
+            if (level === 'medio') title = "MECANISMOS DE DIFICULTAD MEDIA";
+            if (level === 'experto') title = "MECANISMOS PARA EXPERTOS";
+
+            // Datos de ejemplo
+            let mecanismos = [{
+                id: "mec1",
+                nombre: "PUERTA AUTOMATICA 2x2",
+                nivel: "principiante"
+            }, {
+                id: "mec2",
+                nombre: "GRANJA DE CAÑA DE AZUCAR",
+                nivel: "principiante"
+            }, {
+                id: "mec3",
+                nombre: "ASCENSOR DE AGUA",
+                nivel: "medio"
+            }, {
+                id: "mec4",
+                nombre: "SUPER HORNO",
+                nivel: "medio"
+            }, {
+                id: "mec5",
+                nombre: "PUERTA 3x3",
+                nivel: "experto"
+            }, {
+                id: "mec6",
+                nombre: "GRANJA DE HIERRO",
+                nivel: "experto"
+            }];
+
+            // Filtrar mecanismos por nivel
+            let filteredMecanismos = mecanismos.filter(m => m.nivel === level);
+            if (filteredMecanismos.length === 0) filteredMecanismos = mecanismos; // Mostrar todos si no hay filtro
+
+            let accordionHTML = filteredMecanismos.map((m, index) => `
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-${m.id}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${m.id}" aria-expanded="false" aria-controls="collapse-${m.id}">
+                            MECANISMO NO.${index + 1} < ${m.nombre} >
+                        </button>
+                    </h2>
+                    <div id="collapse-${m.id}" class="accordion-collapse collapse" aria-labelledby="heading-${m.id}" data-bs-parent="#mecanismos-accordion">
+                        <div class="accordion-body">
+                            <h3>INFORMACION SOBRE EL MECANISMO</h3>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p>Mecanismo paso a paso: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
+                                    <p>Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="https://placehold.co/400x300/aa1515/efe0e0?text=Video+Mec." alt="Mecanismo ${m.nombre}" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Paso+1" class="img-fluid"></div>
+                                <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Paso+2" class="img-fluid"></div>
+                                <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Paso+3" class="img-fluid"></div>
+                                <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Paso+4" class="img-fluid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            return `
+                <h2>${title}</h2>
+                <div class="accordion" id="mecanismos-accordion">
+                    ${accordionHTML}
+                </div>
+            `;
+        }
+
+        // --- LÓGICA DE NAVEGACIÓN ---
+
+        let currentPage = '';
+        let currentSubPage = '';
+
+        /**
+         * Navega entre las vistas principales y sub-vistas
+         * @param {string} page - La vista principal ('login' o 'main')
+         * @param {string} [subPage] - La sub-página ('home', 'bloques', 'mecanismos')
+         * @param {string} [param] - Parámetro extra (ej. 'principiante')
+         */
+        function navigateTo(page, subPage = 'home', param = null) {
+            // Si navegamos a una vista principal diferente (ej. de Login a Main)
+            if (page !== currentPage) {
+                if (page === 'login') {
+                    app.innerHTML = loginViewTemplate;
+                } else if (page === 'main') {
+                    app.innerHTML = mainViewTemplate;
+                    // El navbar y el sidebar ahora existen, así que podemos
+                    // navegar a la sub-página correcta.
+                    navigateToSubPage(subPage, param);
+                }
+                currentPage = page;
+            } else if (page === 'main') {
+                // Si ya estamos en 'main', solo cambiamos la sub-página
+                navigateToSubPage(subPage, param);
+            }
+        }
+
+        /**
+         * Renderiza el contenido dentro del #content-area de la vista principal
+         */
+        function navigateToSubPage(subPage, param) {
+            if (currentSubPage === subPage && !param) return; // Ya estamos ahí
+
+            const contentArea = document.getElementById('content-area');
+            if (!contentArea) return; // Seguridad
+
+            let content = '';
+            if (subPage === 'home') {
+                content = homeContent;
+            } else if (subPage === 'bloques') {
+                content = bloquesContent;
+            } else if (subPage === 'mecanismos') {
+                content = getMecanismosContent(param); // param será 'principiante', 'medio', etc.
+            }
+
+            contentArea.innerHTML = content;
+            currentSubPage = subPage;
+
+            // Actualizar estado activo en la navegación lateral
+            updateSidebarActiveState(subPage, param);
+        }
+
+        /**
+         * Resalta el ítem activo en el sidebar
+         */
+        function updateSidebarActiveState(subPage, param) {
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav .list-group-item');
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkText = link.textContent.toLowerCase();
+
+                if (subPage === 'bloques' && linkText === 'bloques') {
+                    link.classList.add('active');
+                } else if (subPage === 'mecanismos') {
+                    if (param === 'principiante' && linkText === 'basicos') {
+                        link.classList.add('active');
+                    } else if (param === 'medio' && linkText === 'medios') {
+                        link.classList.add('active');
+                    } else if (param === 'experto' && linkText === 'expertos') {
+                        link.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        // Cargar la página de inicio de sesión al iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            navigateTo('login');
+        });
+    </script>
+
+</body>
+
+</html>
