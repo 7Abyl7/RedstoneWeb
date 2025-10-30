@@ -504,13 +504,13 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
             }, {
                 id: "mec3",
                 nombre: "ASCENSOR DE AGUA",
-                nivel: "medio",
-                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Ascensor",
+                nivel: "experto",
+                gifUrl: "VElevador.gif",
                 stepImages: [
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+1",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+2",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+3",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+4"
+                    "EPaso1.jpg",
+                    "EPaso2.jpg",
+                    "EPaso3.jpg",
+                    "EPaso4.jpg"
                 ],
                 descripcion: `
                     <p>Mecanismo paso a paso: Un ascensor de agua te permite subir y bajar rápidamente usando arena de almas y bloques de magma.</p>
@@ -531,41 +531,11 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                     <p>Mecanismo paso a paso: El super horno utiliza un sistema de tolvas para distribuir combustible y items a múltiples hornos a la vez.</p>
                     <p>Es perfecto para cocinar grandes cantidades de items de forma rápida y eficiente.</p>
                 `
-            }, {
-                id: "mec5",
-                nombre: "PUERTA 3x3",
-                nivel: "experto",
-                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Puerta+3x3",
-                stepImages: [
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+1",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+2",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+3",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+4"
-                ],
-                descripcion: `
-                    <p>Mecanismo paso a paso: La puerta 3x3 es un reto de redstone de nivel experto.</p>
-                    <p>Implica una sincronización precisa de pistones (algunos pegajosos) para mover un centro de 3x3 bloques de forma fluida.</p>
-                `
-            }, {
-                id: "mec6",
-                nombre: "GRANJA DE HIERRO",
-                nivel: "experto",
-                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Granja+Hierro",
-                stepImages: [
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+1",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+2",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+3",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+4"
-                ],
-                descripcion: `
-                    <p>Mecanismo paso a paso: Las granjas de hierro generan golems de hierro automáticamente para farmear lingotes.</p>
-                    <p>Requieren un manejo cuidadoso de las mecánicas de aldeanos y camas para funcionar correctamente.</p>
-De esta forma no repites codigo y añades las 4 imagenes que me pides                `
             }];
 
             // Filtrar mecanismos por nivel
             let filteredMecanismos = mecanismos.filter(m => m.nivel === level);
-            if (filteredMecanismos.length === 0) filteredMecanismos = mecanismos; // Mostrar todos si no hay filtro
+            // if (filteredMecanismos.length === 0) filteredMecanismos = mecanismos; // <- Esta línea se elimina, causaba el error.
 
             let accordionHTML = filteredMecanismos.map((m, index) => `
                 <div class="accordion-item">
