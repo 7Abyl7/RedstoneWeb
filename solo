@@ -441,7 +441,7 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                         <img src="Repetidor.jpg" alt="Repetidor de Redstone" class="img-fluid mb-3">
                     </div>
                     <div class="col-md-8">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.</p>
+                        <p>La función principal de un repetidor de redstone es extender la señal de redstone más allá del límite de 15 bloques, actuando como un amplificador. Además, puede retrasar la señal en 1 a 4 ticks (0.1 a 0.4 segundos) y funciona como un diodo, permitiendo que la corriente fluya en una sola dirección. También tiene la capacidad de bloquearse, manteniendo su estado de energía incluso si la señal de entrada desaparece         Funciones detalladas     Extender la señal: La señal de redstone pierde potencia con la distancia. Un repetidor recibe la señal y la "reinicia" con la máxima intensidad, permitiendo que el circuito continúe por otros 15 bloques.  Retrasar la señal: Al hacer clic derecho en un repetidor, puedes configurar un retardo entre 1 y 4 tics. Cada tic es 0.1 segundos, por lo que un repetidor puede introducir un retraso de hasta 0.4 segundos. Esto es útil para sincronizar mecanismos complejos o crear relojes de redstone.  Actuar como diodo: La corriente solo puede entrar por la parte ancha del repetidor y salir por la punta de la flecha, impidiendo que la energía fluya hacia atrás.  Bloquearse: Un repetidor puede ser "bloqueado" si otro repetidor o un bloque de redstone le emite energía por un lado. Cuando está bloqueado, el repetidor mantiene su estado actual (encendido o apagado), lo cual es útil para crear pestillos. </p>
                     </div>
                 </div>
                 <!-- Fila de 4 imágenes añadida -->
@@ -464,31 +464,73 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
             if (level === 'medio') title = "MECANISMOS DE DIFICULTAD MEDIA";
             if (level === 'experto') title = "MECANISMOS PARA EXPERTOS";
 
-            // Datos de ejemplo
+            // Datos de ejemplo - AÑADIDA LA PROPIEDAD gifUrl y stepImages
             let mecanismos = [{
                 id: "mec1",
                 nombre: "PUERTA AUTOMATICA 2x2",
-                nivel: "principiante"
+                nivel: "principiante",
+                gifUrl: "VPuerta.gif",
+                stepImages: [ // Array de imágenes de pasos
+                    "PPaso1.jpg",
+                    "PPaso2.jpg",
+                    "PPaso3.jpg",
+                    "PPaso4.jpg"
+                ]
             }, {
                 id: "mec2",
                 nombre: "GRANJA DE CAÑA DE AZUCAR",
-                nivel: "principiante"
+                nivel: "principiante",
+                gifUrl: "VCaña.gif",
+                stepImages: [ // Imágenes únicas para este mecanismo
+                    "CPaso1.jpg",
+                    "CPaso2.jpg",
+                    "CPaso3.jpg",
+                    "CPaso4.jpg"
+                ]
             }, {
                 id: "mec3",
                 nombre: "ASCENSOR DE AGUA",
-                nivel: "medio"
+                nivel: "medio",
+                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Ascensor",
+                stepImages: [
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+1",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+2",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+3",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+4"
+                ]
             }, {
                 id: "mec4",
                 nombre: "SUPER HORNO",
-                nivel: "medio"
+                nivel: "medio",
+                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Super+Horno",
+                stepImages: [
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Horno+1",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Horno+2",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Horno+3",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Horno+4"
+                ]
             }, {
                 id: "mec5",
                 nombre: "PUERTA 3x3",
-                nivel: "experto"
+                nivel: "experto",
+                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Puerta+3x3",
+                stepImages: [
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+1",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+2",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+3",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+4"
+                ]
             }, {
                 id: "mec6",
                 nombre: "GRANJA DE HIERRO",
-                nivel: "experto"
+                nivel: "experto",
+                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Granja+Hierro",
+                stepImages: [
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+1",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+2",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+3",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+4"
+                ]
             }];
 
             // Filtrar mecanismos por nivel
@@ -511,14 +553,16 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                                     <p>Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <img src="https://placehold.co/400x300/aa1515/efe0e0?text=Video+Mec." alt="Mecanismo ${m.nombre}" class="img-fluid">
+                                    <!-- CAMBIADO: Ahora usa la gifUrl del mecanismo -->
+                                    <img src="${m.gifUrl}" alt="GIF del Mecanismo ${m.nombre}" class="img-fluid">
                                 </div>
                             </div>
+                            <!-- CAMBIADO: Ahora usa el array stepImages del mecanismo -->
                             <div class="row mt-3">
-                                <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Paso+1" class="img-fluid"></div>
-                                <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Paso+2" class="img-fluid"></div>
-                                <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Paso+3" class="img-fluid"></div>
-                                <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Paso+4" class="img-fluid"></div>
+                                <div class="col-3"><img src="${m.stepImages[0]}" class="img-fluid" alt="Paso 1"></div>
+                                <div class="col-3"><img src="${m.stepImages[1]}" class="img-fluid" alt="Paso 2"></div>
+                                <div class="col-3"><img src="${m.stepImages[2]}" class="img-fluid" alt="Paso 3"></div>
+                                <div class="col-3"><img src="${m.stepImages[3]}" class="img-fluid" alt="Paso 4"></div>
                             </div>
                         </div>
                     </div>
