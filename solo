@@ -475,18 +475,26 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                     "PPaso2.jpg",
                     "PPaso3.jpg",
                     "PPaso4.jpg"
-                ]
+                ],
+                descripcion: `
+                    <p>Mecanismo paso a paso: Esta es la descripción individual de la <strong>Puerta Automática 2x2</strong>. Es un mecanismo excelente para principiantes.</p>
+                    <p>Se necesitan pistones, redstone, botones y un bloque de tu elección. Sigue las imágenes para ver cómo conectarlo todo.</p>
+                `
             }, {
                 id: "mec2",
                 nombre: "GRANJA DE CAÑA DE AZUCAR",
                 nivel: "principiante",
-                gifUrl: "VCaña.gif",
+                gifUrl: "VCana.gif",
                 stepImages: [ // Imágenes únicas para este mecanismo
                     "CPaso1.jpg",
                     "CPaso2.jpg",
                     "CPaso3.jpg",
                     "CPaso4.jpg"
-                ]
+                ],
+                descripcion: `
+                    <p>Mecanismo paso a paso: Esta granja de caña de azúcar es automática y muy eficiente.</p>
+                    <p>Utiliza observadores para detectar el crecimiento y pistones para cortar la caña. El agua la recoge en una tolva.</p>
+                `
             }, {
                 id: "mec3",
                 nombre: "ASCENSOR DE AGUA",
@@ -497,18 +505,26 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+2",
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+3",
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+4"
-                ]
+                ],
+                descripcion: `
+                    <p>Mecanismo paso a paso: Un ascensor de agua te permite subir y bajar rápidamente usando arena de almas y bloques de magma.</p>
+                    <p>No requiere mucha redstone, pero es un mecanismo esencial de transporte vertical.</p>
+                `
             }, {
                 id: "mec4",
                 nombre: "SUPER HORNO",
                 nivel: "medio",
-                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Super+Horno",
+                gifUrl: "VHorno.gif",
                 stepImages: [
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Horno+1",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Horno+2",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Horno+3",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Horno+4"
-                ]
+                    "VPaso1.jpg",
+                    "VPaso2.jpg",
+                    "VPaso3.jpg",
+                    "VPaso4.jpg"
+                ],
+                descripcion: `
+                    <p>Mecanismo paso a paso: El super horno utiliza un sistema de tolvas para distribuir combustible y items a múltiples hornos a la vez.</p>
+                    <p>Es perfecto para cocinar grandes cantidades de items de forma rápida y eficiente.</p>
+                `
             }, {
                 id: "mec5",
                 nombre: "PUERTA 3x3",
@@ -519,7 +535,11 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+2",
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+3",
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Puerta3x3+4"
-                ]
+                ],
+                descripcion: `
+                    <p>Mecanismo paso a paso: La puerta 3x3 es un reto de redstone de nivel experto.</p>
+                    <p>Implica una sincronización precisa de pistones (algunos pegajosos) para mover un centro de 3x3 bloques de forma fluida.</p>
+                `
             }, {
                 id: "mec6",
                 nombre: "GRANJA DE HIERRO",
@@ -530,7 +550,11 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+2",
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+3",
                     "https://placehold.co/150x150/483a3a/efe0e0?text=Hierro+4"
-                ]
+                ],
+                descripcion: `
+                    <p>Mecanismo paso a paso: Las granjas de hierro generan golems de hierro automáticamente para farmear lingotes.</p>
+                    <p>Requieren un manejo cuidadoso de las mecánicas de aldeanos y camas para funcionar correctamente.</p>
+De esta forma no repites codigo y añades las 4 imagenes que me pides                `
             }];
 
             // Filtrar mecanismos por nivel
@@ -549,8 +573,8 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                             <h3>INFORMACION SOBRE EL MECANISMO</h3>
                             <div class="row">
                                 <div class="col-md-8">
-                                    <p>Mecanismo paso a paso: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
-                                    <p>Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                                    <!-- CAMBIADO: Ahora usa la descripcion individual -->
+                                    ${m.descripcion}
                                 </div>
                                 <div class="col-md-4">
                                     <!-- CAMBIADO: Ahora usa la gifUrl del mecanismo -->
