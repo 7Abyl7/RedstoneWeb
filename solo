@@ -16,15 +16,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
     <style>
-        /* * Paleta de colores y fuentes basadas en el PDF
+        /* 
          * Fuentes: 'Press Start 2P' (Títulos), 'VT323' (Cuerpo)
          * Colores:
-         * --mc-dark-red: #aa1515
-         * --mc-bright-red: #e01111
-         * --mc-medium-grey: #adabab
-         * --mc-dark-grey: #483a3a
-         * --mc-light-bg: #efe0e0 (rgb(239, 224, 224))
-         * --mc-white: #ffffff
+            #aa1515
+            #e01111
+            #adabab
+            #483a3a
+            #efe0e0 (rgb(239, 224, 224))
+            #ffffff
          */
         
          :root {
@@ -43,7 +43,7 @@
             background-color: var(--mc-light-bg);
             color: var(--mc-dark-grey);
             font-size: 1.5rem;
-            /* La fuente VT323 es pequeña, la agrandamos */
+            /* La fuente VT323 es pequeña la agrandamos */
             line-height: 1.6;
         }
         /* Estilos de fuentes principales */
@@ -78,7 +78,7 @@
             box-shadow: 6px 6px 0 var(--mc-medium-grey);
             background-color: var(--mc-white);
         }
-        /* --- 1. Página de Inicio de Sesión (Login) --- */
+        /* Página de Inicio de Sesión (Login)  */
         
         #login-view {
             min-height: 100vh;
@@ -126,7 +126,7 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 0 var(--mc-dark-grey);
         }
-        /* --- 2. Página Principal (Main View) --- */
+        /*  Página Principal (Main View)  */
         /* Navbar (Header) */
         
         .navbar-mc {
@@ -176,7 +176,7 @@
         #main-content {
             padding: 2rem 0;
         }
-        /* --- 2a. Sección "Guías de Mecanismos" (Barra roja) --- */
+        /*   Seccion Guias de Mecanismos (Barra roja)  */
         
         .guides-header {
             background-color: var(--mc-dark-red);
@@ -210,7 +210,7 @@
             background-color: var(--mc-medium-grey);
             color: var(--mc-white);
         }
-        /* Área de contenido principal (Home, Bloques, Mecanismos) */
+        /* Area de contenido principal (Home, Bloques, Mecanismos) */
         
         .content-area {
             padding: 1.5rem;
@@ -228,7 +228,7 @@
             max-width: 100%;
             height: auto;
         }
-        /* --- 2c. Estilo Acordeón (Mecanismos) --- */
+        /*  Estilo Acordeón (Mecanismos) */
         
         .accordion-item {
             background-color: var(--mc-white);
@@ -265,7 +265,7 @@
         .accordion-body img {
             margin-bottom: 1rem;
         }
-        /* --- 2b. Estilo Página de Bloques --- */
+        /*  Estilo Pagina de Bloques */
         
         .block-entry {
             margin-bottom: 2rem;
@@ -281,7 +281,7 @@
     </div>
 
     <!-- Bootstrap JS Bundle -->
-    <!-- CORREGIDO: 'integrity' en lugar de 'xintegrity' -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Lógica de la aplicación (Navegación y Vistas) -->
@@ -292,7 +292,7 @@
 
         /**
          * Plantilla para la vista de Inicio de Sesión
-         * Basado en la Maqueta de la Página 9
+
          */
         const loginViewTemplate = `
             <div id="login-view">
@@ -321,9 +321,8 @@
             </div>
         `;
 
-        /**
-         * Plantilla para la vista principal (Navbar + Contenedor de contenido)
-         * Basado en la Maqueta de la Página 10
+        /*
+          Plantilla para la vista principal (Navbar + Contenedor de contenido)
          */
         const mainViewTemplate = `
             <nav id="main-navbar" class="navbar navbar-expand-lg navbar-mc">
@@ -388,8 +387,8 @@
         `;
 
         /**
-         * Contenido para la página de "Inicio"
-         * Basado en la Maqueta de la Página 10
+         * Contenido para la pagina de inicio
+         
          */
         const homeContent = `
             <h2>INFORMACION BASICA DE REDSTONE</h2>
@@ -413,8 +412,8 @@ Bloque de redstone: Si se obtiene un bloque de redstone entero, se puede picar p
         `;
 
         /**
-         * Contenido para la página de "Bloques"
-         * Basado en la Maqueta de la Página 11
+         * Contenido para la página de bloques
+         * 
          */
         const bloquesContent = `
             <h2>INFORMACION SOBRE BLOQUES</h2>
@@ -465,10 +464,8 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
             </div>
         `;
 
-        /**
-         * Contenido para la página de "Mecanismos" (Acordeón)
-         * Basado en la Maqueta de las Páginas 12-14
-         * Esta función genera el HTML dinámicamente.
+        /*
+          Contenido para la página de "Mecanismos" (Acordeón)
          */
         function getMecanismosContent(level) {
             let title = "MECANISMOS";
@@ -476,7 +473,7 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
             if (level === 'medio') title = "MECANISMOS DE DIFICULTAD MEDIA";
             if (level === 'experto') title = "MECANISMOS PARA EXPERTOS";
 
-            // Datos de ejemplo - AÑADIDA LA PROPIEDAD gifUrl y stepImages
+            s
             let mecanismos = [{
                 id: "mec1",
                 nombre: "PUERTA AUTOMATICA 2x2",
@@ -589,7 +586,7 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
         let currentSubPage = '';
 
         /**
-         * AÑADIDA: Función para manejar el intento de login
+         *  Manejar el intento de login
          */
         function handleLogin() {
             const usernameInput = document.getElementById('username');
@@ -613,31 +610,31 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
         }
 
 
-        /**
-         * Navega entre las vistas principales y sub-vistas
-         * @param {string} page - La vista principal ('login' o 'main')
-         * @param {string} [subPage] - La sub-página ('home', 'bloques', 'mecanismos')
-         * @param {string} [param] - Parámetro extra (ej. 'principiante')
+        /*
+          Navega entre las vistas principales y sub-vistas
+          La vista principal ('login' o 'main')
+          La sub-página ('home', 'bloques', 'mecanismos')
+          Parámetro extra (ej. 'principiante')
          */
         function navigateTo(page, subPage = 'home', param = null) {
             // Si navegamos a una vista principal diferente (ej. de Login a Main)
             if (page !== currentPage) {
                 if (page === 'login') {
                     app.innerHTML = loginViewTemplate;
-                    // AÑADIDO: Adjuntar el listener al botón de login
+                    //  listener de boton de login
                     const loginButton = document.getElementById('login-button');
                     if (loginButton) {
                         loginButton.addEventListener('click', handleLogin);
                     }
                 } else if (page === 'main') {
                     app.innerHTML = mainViewTemplate;
-                    // El navbar y el sidebar ahora existen, así que podemos
-                    // navegar a la sub-página correcta.
+                    // El navbar y el sidebar ahora existen
+
                     navigateToSubPage(subPage, param);
                 }
                 currentPage = page;
             } else if (page === 'main') {
-                // Si ya estamos en 'main', solo cambiamos la sub-página
+                // Si ya estamos en main solo cambiamos la sub-página
                 navigateToSubPage(subPage, param);
             }
         }
@@ -657,7 +654,7 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
             } else if (subPage === 'bloques') {
                 content = bloquesContent;
             } else if (subPage === 'mecanismos') {
-                content = getMecanismosContent(param); // param será 'principiante', 'medio', etc.
+                content = getMecanismosContent(param); // param será principiante, medio, avanzado.
             }
 
             contentArea.innerHTML = content;
