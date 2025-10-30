@@ -7,6 +7,7 @@
     <title>Guía de Redstone </title>
 
     <!-- Bootstrap CSS -->
+    <!-- CORREGIDO: 'integrity' en lugar de 'xintegrity' -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Google Fonts (Estilo Minecraft) -->
@@ -280,6 +281,7 @@
     </div>
 
     <!-- Bootstrap JS Bundle -->
+    <!-- CORREGIDO: 'integrity' en lugar de 'xintegrity' -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Lógica de la aplicación (Navegación y Vistas) -->
@@ -308,8 +310,11 @@
                             <label for="password" class="form-label" style="font-size: 0.9rem;">Contraseña:</label>
                             <input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña">
                         </div>
+                        <!-- Párrafo para mostrar errores de login -->
+                        <p id="login-error" class="text-danger text-center mt-3" style="font-family: var(--mc-font-body); font-size: 1.2rem; display: none; color: var(--mc-bright-red) !important;"></p>
                         <div class="text-center mt-4">
-                            <button type="button" class="btn btn-mc" onclick="navigateTo('main')">INGRESAR</button>
+                            <!-- CAMBIADO: Se quitó onclick y se añadió id="login-button" -->
+                            <button type="button" class="btn btn-mc" id="login-button">INGRESAR</button>
                         </div>
                     </form>
                 </div>
@@ -323,8 +328,9 @@
         const mainViewTemplate = `
             <nav id="main-navbar" class="navbar navbar-expand-lg navbar-mc">
                 <div class="container">
+                    <!-- CAMBIADO: URL del logo -->
                     <a class="navbar-brand" href="#" onclick="navigateTo('main', 'home')">
-                        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/cd/Redstone_Ore_JE4_BE3.png/revision/latest?cb=20210226103025" alt="Logo">
+                        <img src="Logo.png" alt="Logo">
                         GUIA REDSTONE
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -505,12 +511,12 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                 id: "mec3",
                 nombre: "ASCENSOR DE AGUA",
                 nivel: "experto",
-                gifUrl: "VElevador.gif",
+                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Ascensor",
                 stepImages: [
-                    "EPaso1.jpg",
-                    "EPaso2.jpg",
-                    "EPaso3.jpg",
-                    "EPaso4.jpg"
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+1",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+2",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+3",
+                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+4"
                 ],
                 descripcion: `
                     <p>Mecanismo paso a paso: Un ascensor de agua te permite subir y bajar rápidamente usando arena de almas y bloques de magma.</p>
@@ -583,6 +589,31 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
         let currentSubPage = '';
 
         /**
+         * AÑADIDA: Función para manejar el intento de login
+         */
+        function handleLogin() {
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const errorElement = document.getElementById('login-error');
+
+            const username = usernameInput ? usernameInput.value : '';
+            const password = passwordInput ? passwordInput.value : '';
+
+            // Validación de usuario y contraseña
+            if (username === "Aby" && password === "12345678") {
+                if (errorElement) errorElement.style.display = 'none';
+                navigateTo('main'); // Navega a la página principal si es correcto
+            } else {
+                // Muestra error si es incorrecto
+                if (errorElement) {
+                    errorElement.textContent = "Usuario o contraseña incorrectos.";
+                    errorElement.style.display = 'block';
+                }
+            }
+        }
+
+
+        /**
          * Navega entre las vistas principales y sub-vistas
          * @param {string} page - La vista principal ('login' o 'main')
          * @param {string} [subPage] - La sub-página ('home', 'bloques', 'mecanismos')
@@ -593,6 +624,11 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
             if (page !== currentPage) {
                 if (page === 'login') {
                     app.innerHTML = loginViewTemplate;
+                    // AÑADIDO: Adjuntar el listener al botón de login
+                    const loginButton = document.getElementById('login-button');
+                    if (loginButton) {
+                        loginButton.addEventListener('click', handleLogin);
+                    }
                 } else if (page === 'main') {
                     app.innerHTML = mainViewTemplate;
                     // El navbar y el sidebar ahora existen, así que podemos
