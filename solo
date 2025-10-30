@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-<!-- Aby -->
-=======
-<!-- El gei -->
->>>>>>> a2fa27443d8f1fa639b899322ba9b6e21aadc77c
 <!DOCTYPE html>
 <html lang="es">
 
@@ -303,7 +298,7 @@
             <div id="login-view">
                 <div class="login-card pixel-border">
                     <div class="text-center mb-4">
-                        <img src="https://placehold.co/150x150/aa1515/efe0e0?text=Bloque+Redstone" alt="Logo Redstone" class="img-fluid">
+                        <img src="https://static.wikia.nocookie.net/minecraft/images/d/d3/Redstone_blok.png/revision/latest/scale-to-width-down/250?cb=20170429185629" alt="Logo Redstone" class="img-fluid">
                     </div>
                     <h2 class="mb-4">INICIAR SESION</h2>
                     <form>
@@ -417,17 +412,22 @@
                 <h3>INFORMACION SOBRE EL BLOQUE: ANTORCHA DE REDSTONE</h3>
                 <div class="row mb-3">
                     <div class="col-md-8">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.</p>
+                        <p>La antorcha de redstone es una fuente de energía constante en Minecraft que puede activar circuitos de redstone, actuar como un inversor de señal ("puerta NOT"), y apagar su propia señal al recibir energía en el bloque que la soporta. También es útil como fuente de luz y para generar mecanismos complejos al combinarse con otros componentes. 
+Funciones principales
+Fuente de energía: Proporciona una señal de redstone que se extiende hasta 15 bloques de cable y puede alimentar bloques adyacentes y el bloque justo encima. 
+Inversor de señal: Su utilidad más importante es invertir la señal. Cuando el bloque donde está colocada recibe energía, la antorcha se apaga, lo que se aprovecha para crear circuitos lógicos como la puerta NOT. 
+Activación de dispositivos: Permite activar pistones, puertas, dispensadores y otros componentes de redstone a distancia. 
+Construcción de mecanismos: Es un componente fundamental para crear circuitos avanzados, relojes y cerraduras de combinación al combinarse con otros componentes como repetidores y comparadores</p>
                     </div>
                     <div class="col-md-4">
-                        <img src="https://placehold.co/400x300/483a3a/efe0e0?text=Antorcha" alt="Antorcha de Redstone" class="img-fluid">
+                        <img src="Antorcha1.jpg" alt="Antorcha de Redstone" class="img-fluid">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Img1" class="img-fluid"></div>
-                    <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Img2" class="img-fluid"></div>
-                    <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Img3" class="img-fluid"></div>
-                    <div class="col-3"><img src="https://placehold.co/150x150/483a3a/efe0e0?text=Img4" class="img-fluid"></div>
+                    <div class="col-3"><img src="Antorchasuelo.jpg" class="img-fluid"></div>
+                    <div class="col-3"><img src="Antorchasuelo0.jpg" class="img-fluid"></div>
+                    <div class="col-3"><img src="Antorchabloque.jpg" class="img-fluid"></div>
+                    
                 </div>
             </div>
             
@@ -438,12 +438,18 @@
                 <h3>INFORMACION SOBRE EL BLOQUE: REPETIDOR</h3>
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="https://placehold.co/400x300/483a3a/efe0e0?text=Repetidor" alt="Repetidor de Redstone" class="img-fluid mb-3">
+                        <img src="Repetidor.jpg" alt="Repetidor de Redstone" class="img-fluid mb-3">
                     </div>
                     <div class="col-md-8">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.</p>
                     </div>
                 </div>
+                <!-- Fila de 4 imágenes añadida -->
+                <div class="row mt-3">
+                    <div class="col-3"><img src="Repetidorfases.jpg" class="img-fluid"></div>
+                    <div class="col-3"><img src="Repetidor1.jpg" class="img-fluid"></div>
+                    <div class="col-3"><img src="Repetidor01.jpg" class="img-fluid"></div>
+                  
             </div>
         `;
 
