@@ -330,7 +330,7 @@
                 <div class="container">
                     <!-- CAMBIADO: URL del logo -->
                     <a class="navbar-brand" href="#" onclick="navigateTo('main', 'home')">
-                        <img src="Logo.png" alt="Logo">
+                        <img src="Logo.jpg" alt="Logo">
                         GUIA REDSTONE
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -407,7 +407,7 @@ Mina: Requiere un pico de hierro o superior para ser minado y obtener el polvo d
 Bloque de redstone: Si se obtiene un bloque de redstone entero, se puede picar para obtener polvo o utilizarlo como una fuente de energía constan</p>
                 </div>
                 <div class="col-md-4">
-                    <img src="https://minecraft.wiki/images/thumb/Redstone_Dust_JE2_BE2.png/400px-Redstone_Dust_JE2_BE2.png?8cf17 alt="Redstone en Minecraft" class="img-fluid">
+                    <img src="PRcueva.jpg" alt="Redstone en Minecraft" class="img-fluid">
                 </div>
             </div>
         `;
