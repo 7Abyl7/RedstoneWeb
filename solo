@@ -391,11 +391,19 @@
             <h2>INFORMACION BASICA DE REDSTONE</h2>
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel.</p>
+                    <p>La redstone es un elemento fundamental en el juego Minecraft que funciona como un simulador de electricidad, permitiendo a los jugadores crear circuitos y automatizar procesos. Se obtiene al minar un mineral rojo en el subsuelo, el cual al ser picado suelta un polvo del mismo nombre. Este polvo se utiliza para crear circuitos que pueden activar mecanismos como puertas automáticas, pistones y trampas, con un alcance máximo de 15 bloques. 
+Características y usos
+Simula electricidad: El polvo de redstone actúa como un cable que transmite energía desde una fuente (como una palanca, un botón o una placa de presión) hasta un dispositivo que la reciba. 
+Automatización: Permite automatizar acciones y construir dispositivos complejos como granjas automáticas, ascensores e incluso computadoras dentro del juego. 
+Componente de circuitos: Se puede colocar para conectar varios componentes y crear circuitos lógicos. 
+Transmisión de energía: La señal de redstone puede viajar hasta 15 bloques. Para extenderla o hacerla funcionar más allá, se pueden usar elementos como repetidores. 
+Dónde encontrarla
+Minería: El mineral de redstone se encuentra bajo tierra, entre las capas 0 y 16, siendo más común alrededor de la capa 10. 
+Mina: Requiere un pico de hierro o superior para ser minado y obtener el polvo de redstone. 
+Bloque de redstone: Si se obtiene un bloque de redstone entero, se puede picar para obtener polvo o utilizarlo como una fuente de energía constan</p>
                 </div>
                 <div class="col-md-4">
-                    <img src="https://placehold.co/600x400/483a3a/efe0e0?text=Redstone" alt="Redstone en Minecraft" class="img-fluid">
+                    <img src="https://minecraft.wiki/images/thumb/Redstone_Dust_JE2_BE2.png/150px-Redstone_Dust_JE2_BE2.png?8cf17 alt="Redstone en Minecraft" class="img-fluid">
                 </div>
             </div>
         `;
