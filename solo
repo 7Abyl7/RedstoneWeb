@@ -511,12 +511,12 @@ Construcción de mecanismos: Es un componente fundamental para crear circuitos a
                 id: "mec3",
                 nombre: "ASCENSOR DE AGUA",
                 nivel: "experto",
-                gifUrl: "https://placehold.co/400x300/aa1515/efe0e0?text=GIF+Ascensor",
+                gifUrl: "VElevador.gif",
                 stepImages: [
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+1",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+2",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+3",
-                    "https://placehold.co/150x150/483a3a/efe0e0?text=Ascensor+4"
+                    "EPaso1.jpg",
+                    "EPaso2.jpg",
+                    "Epaso3.jpg",
+                    "EPaso4.jpg"
                 ],
                 descripcion: `
                     <p>Mecanismo paso a paso: Un ascensor de agua te permite subir y bajar rápidamente usando arena de almas y bloques de magma.</p>
