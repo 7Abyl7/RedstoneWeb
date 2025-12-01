@@ -7,294 +7,253 @@
     <title>Guía de Redstone </title>
 
     <!-- Bootstrap CSS -->
-    <!-- CORREGIDO: 'integrity' en lugar de 'xintegrity' -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Google Fonts (Estilo Minecraft) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
-    <style>
-        /* 
-         * Fuentes: 'Press Start 2P' (Títulos), 'VT323' (Cuerpo)
-         * Colores:
-            #aa1515
-            #e01111
-            #adabab
-            #483a3a
-            #efe0e0 (rgb(239, 224, 224))
-            #ffffff
-         */
-
-        :root {
-            --mc-dark-red: #aa1515;
-            --mc-bright-red: #e01111;
-            --mc-medium-grey: #adabab;
-            --mc-dark-grey: #483a3a;
-            --mc-light-bg: #efe0e0;
-            --mc-white: #ffffff;
-            --mc-font-heading: 'Press Start 2P', cursive;
-            --mc-font-body: 'VT323', monospace;
-        }
-
-        body {
-            font-family: var(--mc-font-body);
-            background-color: var(--mc-light-bg);
-            color: var(--mc-dark-grey);
-            font-size: 1.5rem;
-            /* La fuente VT323 es pequeña la agrandamos */
-            line-height: 1.6;
-        }
-
-        /* Estilos de fuentes principales */
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        .navbar-brand,
-        .nav-link,
-        .btn,
-        .dropdown-item,
-        .accordion-button,
-        .form-label {
-            font-family: var(--mc-font-heading);
-            color: var(--mc-dark-grey);
-        }
-
-        h2 {
-            font-size: 1.8rem;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-        }
-
-        /* Estilo pixelado para bordes */
-
-        .pixel-border {
-            border: 4px solid var(--mc-dark-grey);
-            box-shadow: 6px 6px 0 var(--mc-medium-grey);
-            background-color: var(--mc-white);
-        }
-
-        /* Página de Inicio de Sesión (Login)  */
-
-        #login-view {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-card {
-            max-width: 500px;
-            width: 90%;
-            padding: 2rem;
-        }
-
-        .login-card h2 {
-            font-size: 1.5rem;
-            text-align: center;
-            color: var(--mc-dark-red);
-        }
-
-        .form-control {
-            font-family: var(--mc-font-body);
-            font-size: 1.2rem;
-            border: 2px solid var(--mc-dark-grey);
-        }
-
-        .form-control:focus {
-            border-color: var(--mc-dark-red);
-            box-shadow: 0 0 10px var(--mc-bright-red);
-        }
-
-        .btn-mc {
-            font-family: var(--mc-font-heading);
-            background-color: var(--mc-dark-red);
-            color: var(--mc-white);
-            border: 2px solid var(--mc-dark-grey);
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-mc:hover {
-            background-color: var(--mc-bright-red);
-            color: var(--mc-white);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 0 var(--mc-dark-grey);
-        }
-
-        /*  Página Principal (Main View)  */
-        /* Navbar (Header) */
-
-        .navbar-mc {
-            /* Textura de piedra de Minecraft */
-            border-bottom: 6px solid var(--mc-dark-grey);
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-
-        .navbar-brand {
-            font-size: 1.2rem;
-            color: var(--mc-dark-red);
-        }
-
-        .navbar-brand img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .nav-link {
-            font-size: 0.8rem;
-            color: var(--mc-dark-grey);
-        }
-
-        .nav-link.active,
-        .nav-link:hover {
-            color: var(--mc-dark-red);
-        }
-
-        .dropdown-menu {
-            background-color: var(--mc-light-bg);
-            border: 2px solid var(--mc-dark-grey);
-            font-family: var(--mc-font-heading);
-        }
-
-        .dropdown-item {
-            font-size: 0.8rem;
-        }
-
-        .dropdown-item:hover {
-            background-color: var(--mc-dark-red);
-            color: var(--mc-white);
-        }
-
-        /* Contenedor principal del contenido */
-
-        #main-content {
-            padding: 2rem 0;
-        }
-
-        /*   Seccion Guias de Mecanismos (Barra roja)  */
-
-        .guides-header {
-            background-color: var(--mc-dark-red);
-            color: var(--mc-white);
-            padding: 1rem;
-            border-top: 4px solid var(--mc-dark-grey);
-            border-bottom: 4px solid var(--mc-dark-grey);
-            text-align: center;
-        }
-
-        .guides-header h3 {
-            color: var(--mc-white);
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        /* Navegación lateral (Sidebar) */
-
-        .sidebar-nav .list-group-item {
-            font-family: var(--mc-font-heading);
-            font-size: 1rem;
-            background-color: var(--mc-white);
-            border: 2px solid var(--mc-dark-grey);
-            margin-bottom: 0.5rem;
-            color: var(--mc-dark-grey);
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .sidebar-nav .list-group-item:hover,
-        .sidebar-nav .list-group-item.active {
-            background-color: var(--mc-medium-grey);
-            color: var(--mc-white);
-        }
-
-        /* Area de contenido principal (Home, Bloques, Mecanismos) */
-
-        .content-area {
-            padding: 1.5rem;
-        }
-
-        .content-area h2 {
-            color: var(--mc-dark-red);
-            border-bottom: 4px solid var(--mc-medium-grey);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .content-area img {
-            border: 2px solid var(--mc-dark-grey);
-            max-width: 100%;
-            height: auto;
-        }
-
-        /*  Estilo Acordeón (Mecanismos) */
-
-        .accordion-item {
-            background-color: var(--mc-white);
-            border: 2px solid var(--mc-dark-grey);
-            margin-bottom: 1rem;
-        }
-
-        .accordion-button {
-            font-size: 1rem;
-            background-color: var(--mc-medium-grey);
-            color: var(--mc-dark-grey);
-        }
-
-        .accordion-button:not(.collapsed) {
-            background-color: var(--mc-dark-red);
-            color: var(--mc-white);
-            box-shadow: none;
-        }
-
-        .accordion-button:focus {
-            box-shadow: none;
-            border: none;
-        }
-
-        .accordion-button::after {
-            /* Personalizar flecha de acordeón */
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23483a3a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        }
-
-        .accordion-button:not(.collapsed)::after {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        }
-
-        .accordion-body img {
-            margin-bottom: 1rem;
-        }
-
-        /*  Estilo Pagina de Bloques */
-
-        .block-entry {
-            margin-bottom: 2rem;
-        }
-    </style>
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
     <!-- Contenedor principal de la aplicación -->
     <div id="app">
+        <!-- VISTA DE LOGIN -->
+        <div id="login-view">
+            <div class="login-card pixel-border">
+                <div class="text-center mb-4">
+                    <img src="Imagenes/Logo.jpg" alt="Logo Redstone" class="img-fluid">
+                </div>
+                <h2 class="mb-4">INICIAR SESION</h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="username" class="form-label" style="font-size: 0.9rem;">Nombre de Usuario:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Introduce tu usuario">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label" style="font-size: 0.9rem;">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña">
+                    </div>
+                    <!-- Párrafo para mostrar errores de login -->
+                    <p id="login-error" class="text-danger text-center mt-3"
+                        style="font-family: var(--mc-font-body); font-size: 1.2rem; display: none; color: var(--mc-bright-red) !important;">
+                    </p>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-mc" id="login-button">INGRESAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <!-- VISTA PRINCIPAL (Oculta por defecto) -->
+        <div id="main-view" style="display: none;">
+            <nav id="main-navbar" class="navbar navbar-expand-lg navbar-mc">
+                <div class="container">
+                    <a class="navbar-brand" href="#" onclick="navigateTo('main', 'home')">
+                        <img src="Imagenes/Logo.jpg" alt="Logo">
+                        GUIA REDSTONE
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="navigateTo('main', 'home')">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="navigateTo('main', 'bloques')">Bloques</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="mechanismsDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Mecanismos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="mechanismsDropdown">
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="navigateTo('main', 'mecanismos', 'principiante')">Principiantes</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="navigateTo('main', 'mecanismos', 'medio')">Intermedios</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="navigateTo('main', 'mecanismos', 'experto')">Expertos</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="navigateTo('login')">Cerrar Sesión</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <main id="main-content" class="container mt-4">
+                <div class="row">
+                    <!-- Columna de Navegación Lateral (Sidebar) -->
+                    <div class="col-lg-3">
+                        <div class="guides-header mb-3">
+                            <h3>GUIAS DE MECANISMOS</h3>
+                        </div>
+                        <div class="list-group sidebar-nav">
+                            <a class="list-group-item" onclick="navigateTo('main', 'bloques')">BLOQUES</a>
+                            <a class="list-group-item"
+                                onclick="navigateTo('main', 'mecanismos', 'principiante')">BASICOS</a>
+                            <a class="list-group-item" onclick="navigateTo('main', 'mecanismos', 'medio')">MEDIOS</a>
+                            <a class="list-group-item"
+                                onclick="navigateTo('main', 'mecanismos', 'experto')">EXPERTOS</a>
+                        </div>
+                    </div>
+
+                    <!-- Área de contenido principal -->
+                    <div class="col-lg-9">
+                        <div id="content-area" class="content-area pixel-border">
+
+                            <!-- SUB-VISTA: HOME -->
+                            <div id="view-home">
+                                <h2>INFORMACION BASICA DE REDSTONE</h2>
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <p>La redstone es un elemento fundamental en el juego Minecraft que funciona
+                                            como un simulador de electricidad, permitiendo a los jugadores crear
+                                            circuitos y automatizar procesos. Se obtiene al minar un mineral rojo en el
+                                            subsuelo, el cual al ser picado suelta un polvo del mismo nombre. Este polvo
+                                            se utiliza para crear circuitos que pueden activar mecanismos como puertas
+                                            automáticas, pistones y trampas, con un alcance máximo de 15 bloques.
+                                            Características y usos
+                                            Simula electricidad: El polvo de redstone actúa como un cable que transmite
+                                            energía desde una fuente (como una palanca, un botón o una placa de presión)
+                                            hasta un dispositivo que la reciba.
+                                            Automatización: Permite automatizar acciones y construir dispositivos
+                                            complejos como granjas automáticas, ascensores e incluso computadoras dentro
+                                            del juego.
+                                            Componente de circuitos: Se puede colocar para conectar varios componentes y
+                                            crear circuitos lógicos.
+                                            Transmisión de energía: La señal de redstone puede viajar hasta 15 bloques.
+                                            Para extenderla o hacerla funcionar más allá, se pueden usar elementos como
+                                            repetidores.
+                                            Dónde encontrarla
+                                            Minería: El mineral de redstone se encuentra bajo tierra, entre las capas 0
+                                            y 16, siendo más común alrededor de la capa 10.
+                                            Mina: Requiere un pico de hierro o superior para ser minado y obtener el
+                                            polvo de redstone.
+                                            Bloque de redstone: Si se obtiene un bloque de redstone entero, se puede
+                                            picar para obtener polvo o utilizarlo como una fuente de energía constan</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="Imagenes/PRcueva.jpg" alt="Redstone en Minecraft" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SUB-VISTA: BLOQUES (Oculta por defecto) -->
+                            <div id="view-bloques" style="display: none;">
+                                <h2>INFORMACION SOBRE BLOQUES</h2>
+
+                                <!-- Entrada de Bloque 1 -->
+                                <div class="block-entry">
+                                    <h3>INFORMACION SOBRE EL BLOQUE: ANTORCHA DE REDSTONE</h3>
+                                    <div class="row mb-3">
+                                        <div class="col-md-8">
+                                            <p>La antorcha de redstone es una fuente de energía constante en Minecraft
+                                                que puede activar circuitos de redstone, actuar como un inversor de
+                                                señal ("puerta NOT"), y apagar su propia señal al recibir energía en el
+                                                bloque que la soporta. También es útil como fuente de luz y para generar
+                                                mecanismos complejos al combinarse con otros componentes.
+                                                Funciones principales
+                                                Fuente de energía: Proporciona una señal de redstone que se extiende
+                                                hasta 15 bloques de cable y puede alimentar bloques adyacentes y el
+                                                bloque justo encima.
+                                                Inversor de señal: Su utilidad más importante es invertir la señal.
+                                                Cuando el bloque donde está colocada recibe energía, la antorcha se
+                                                apaga, lo que se aprovecha para crear circuitos lógicos como la puerta
+                                                NOT.
+                                                Activación de dispositivos: Permite activar pistones, puertas,
+                                                dispensadores y otros componentes de redstone a distancia.
+                                                Construcción de mecanismos: Es un componente fundamental para crear
+                                                circuitos avanzados, relojes y cerraduras de combinación al combinarse
+                                                con otros componentes como repetidores y comparadores</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="Imagenes/Antorcha1.jpg" alt="Antorcha de Redstone"
+                                                class="img-fluid">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3"><img src="Imagenes/Antorchasuelo.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-3"><img src="Imagenes/Antorchasuelo0.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-3"><img src="Imagenes/Antorchabloque.jpg" class="img-fluid">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <hr style="border-top: 4px solid var(--mc-medium-grey);">
+
+                                <!-- Entrada de Bloque 2 -->
+                                <div class="block-entry mt-4">
+                                    <h3>INFORMACION SOBRE EL BLOQUE: REPETIDOR</h3>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img src="Imagenes/Repetidor.jpg" alt="Repetidor de Redstone"
+                                                class="img-fluid mb-3">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p>La función principal de un repetidor de redstone es extender la señal de
+                                                redstone más allá del límite de 15 bloques, actuando como un
+                                                amplificador. Además, puede retrasar la señal en 1 a 4 ticks (0.1 a 0.4
+                                                segundos) y funciona como un diodo, permitiendo que la corriente fluya
+                                                en una sola dirección. También tiene la capacidad de bloquearse,
+                                                manteniendo su estado de energía incluso si la señal de entrada
+                                                desaparece Funciones detalladas Extender la señal: La señal de redstone
+                                                pierde potencia con la distancia. Un repetidor recibe la señal y la
+                                                "reinicia" con la máxima intensidad, permitiendo que el circuito
+                                                continúe por otros 15 bloques.  Retrasar la señal: Al hacer clic derecho
+                                                en un repetidor, puedes configurar un retardo entre 1 y 4 tics. Cada tic
+                                                es 0.1 segundos, por lo que un repetidor puede introducir un retraso de
+                                                hasta 0.4 segundos. Esto es útil para sincronizar mecanismos complejos o
+                                                crear relojes de redstone.  Actuar como diodo: La corriente solo puede
+                                                entrar por la parte ancha del repetidor y salir por la punta de la
+                                                flecha, impidiendo que la energía fluya hacia atrás.  Bloquearse: Un
+                                                repetidor puede ser "bloqueado" si otro repetidor o un bloque de
+                                                redstone le emite energía por un lado. Cuando está bloqueado, el
+                                                repetidor mantiene su estado actual (encendido o apagado), lo cual es
+                                                útil para crear pestillos. </p>
+                                        </div>
+                                    </div>
+                                    <!-- Fila de 4 imágenes añadida -->
+                                    <div class="row mt-3">
+                                        <div class="col-3"><img src="Imagenes/Repetidorfases.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-3"><img src="Imagenes/Repetidor1.jpg" class="img-fluid"></div>
+                                        <div class="col-3"><img src="Imagenes/Repetidor01.jpg" class="img-fluid"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SUB-VISTA: MECANISMOS (Oculta por defecto, se llena dinámicamente) -->
+                            <div id="view-mecanismos" style="display: none;">
+                                <!-- El contenido de mecanismos se inyectará aquí -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
 
     <!-- Bootstrap JS Bundle -->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
     <!-- Lógica de la aplicación (Navegación y Vistas) -->
