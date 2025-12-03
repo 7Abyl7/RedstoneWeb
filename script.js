@@ -283,6 +283,7 @@ const bloquesData = [
 
 let currentPage = '';
 let currentSubPage = '';
+let currentUser = null; // Almacena el usuario logueado: { id, username }
 
 /**
  *  Manejar el intento de login
@@ -295,17 +296,99 @@ function handleLogin() {
     const username = usernameInput ? usernameInput.value : '';
     const password = passwordInput ? passwordInput.value : '';
 
-    // Validación de usuario y contraseña
-    if (username === "Aby" && password === "12345678") {
-        if (errorElement) errorElement.style.display = 'none';
-        navigateTo('main'); // Navega a la página principal si es correcto
+    // Validación de usuario y contraseña con backend PHP
+    fetch('login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                if (errorElement) errorElement.style.display = 'none';
+                currentUser = data.user; // Guardar usuario logueado
+                navigateTo('main'); // Navega a la página principal si es correcto
+            } else {
+                // Muestra error si es incorrecto
+                if (errorElement) {
+                    errorElement.textContent = data.message || "Usuario o contraseña incorrectos.";
+                    errorElement.style.display = 'block';
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            if (errorElement) {
+                errorElement.textContent = "Error al conectar con el servidor.";
+                errorElement.style.display = 'block';
+            }
+        });
+}
+
+/**
+ * Alternar entre Login y Registro
+ */
+function toggleLoginRegister(view) {
+    const loginView = document.getElementById('login-view');
+    const registerView = document.getElementById('register-view');
+
+    // Ocultar ambos primero (dentro del contenedor de login, no la app entera)
+    // Nota: login-view es el ID del contenedor principal de login en el HTML actual.
+    // Necesitamos ajustar la visibilidad de las tarjetas internas si queremos mantener el fondo.
+    // Pero según el HTML, 'login-view' y 'register-view' son hermanos directos de 'app'.
+
+    if (view === 'login') {
+        if (loginView) loginView.style.display = 'flex';
+        if (registerView) registerView.style.display = 'none';
     } else {
-        // Muestra error si es incorrecto
-        if (errorElement) {
-            errorElement.textContent = "Usuario o contraseña incorrectos.";
-            errorElement.style.display = 'block';
-        }
+        if (loginView) loginView.style.display = 'none';
+        if (registerView) registerView.style.display = 'flex';
     }
+}
+
+/**
+ * Manejar el registro de usuario
+ */
+function handleRegister(event) {
+    event.preventDefault();
+    const usernameInput = document.getElementById('reg-username');
+    const passwordInput = document.getElementById('reg-password');
+    const errorElement = document.getElementById('register-error');
+
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+
+    fetch('add_user.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Cuenta creada exitosamente. Por favor inicia sesión.");
+                toggleLoginRegister('login');
+                usernameInput.value = '';
+                passwordInput.value = '';
+                if (errorElement) errorElement.style.display = 'none';
+            } else {
+                if (errorElement) {
+                    errorElement.textContent = data.message || "Error al crear cuenta.";
+                    errorElement.style.display = 'block';
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            if (errorElement) {
+                errorElement.textContent = "Error de conexión.";
+                errorElement.style.display = 'block';
+            }
+        });
 }
 
 
@@ -317,10 +400,12 @@ function handleLogin() {
  */
 function navigateTo(page, subPage = 'home', param = null) {
     const loginView = document.getElementById('login-view');
+    const registerView = document.getElementById('register-view');
     const mainView = document.getElementById('main-view');
 
     if (page === 'login') {
-        if (loginView) loginView.style.display = 'flex'; // Login usa flex para centrar
+        if (loginView) loginView.style.display = 'flex';
+        if (registerView) registerView.style.display = 'none';
         if (mainView) mainView.style.display = 'none';
 
         // Resetear campos de login
@@ -331,8 +416,11 @@ function navigateTo(page, subPage = 'home', param = null) {
         if (passwordInput) passwordInput.value = '';
         if (errorElement) errorElement.style.display = 'none';
 
+        currentUser = null; // Limpiar usuario al salir
+
     } else if (page === 'main') {
         if (loginView) loginView.style.display = 'none';
+        if (registerView) registerView.style.display = 'none';
         if (mainView) mainView.style.display = 'block';
 
         navigateToSubPage(subPage, param);
@@ -347,11 +435,13 @@ function navigateToSubPage(subPage, param) {
     const viewHome = document.getElementById('view-home');
     const viewBloques = document.getElementById('view-bloques');
     const viewMecanismos = document.getElementById('view-mecanismos');
+    const viewUsuarios = document.getElementById('view-usuarios');
 
     // Ocultar todas las sub-vistas primero
     if (viewHome) viewHome.style.display = 'none';
     if (viewBloques) viewBloques.style.display = 'none';
     if (viewMecanismos) viewMecanismos.style.display = 'none';
+    if (viewUsuarios) viewUsuarios.style.display = 'none';
 
     // Mostrar la seleccionada
     if (subPage === 'home') {
@@ -365,6 +455,11 @@ function navigateToSubPage(subPage, param) {
         if (viewMecanismos) {
             viewMecanismos.style.display = 'block';
             renderMecanismos(param); // Renderizar contenido dinámico
+        }
+    } else if (subPage === 'usuarios') {
+        if (viewUsuarios) {
+            viewUsuarios.style.display = 'block';
+            renderUsers();
         }
     }
 
@@ -494,12 +589,194 @@ function updateSidebarActiveState(subPage, param) {
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-    // Listener para el botón de login (ahora es estático en el HTML)
+    // Listener para el botón de login
     const loginButton = document.getElementById('login-button');
     if (loginButton) {
         loginButton.addEventListener('click', handleLogin);
     }
 
+    // Listener para registro
+    const registerForm = document.getElementById('register-form');
+    if (registerForm) {
+        registerForm.addEventListener('submit', handleRegister);
+    }
+
     // Iniciar en login
     navigateTo('login');
 });
+
+/**
+ * Renderiza la vista de usuarios según permisos
+ */
+function renderUsers() {
+    const adminSection = document.getElementById('admin-section');
+    const currentUsernameDisplay = document.getElementById('current-username-display');
+
+    if (currentUsernameDisplay && currentUser) {
+        currentUsernameDisplay.textContent = currentUser.username;
+    }
+
+    // Si es Aby, mostrar panel de admin
+    if (currentUser && currentUser.username === 'Aby') {
+        if (adminSection) adminSection.style.display = 'block';
+
+        const tableBody = document.querySelector('#users-table tbody');
+        if (!tableBody) return;
+
+        fetch('get_users.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    tableBody.innerHTML = data.users.map(user => `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.username}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" onclick="handleDeleteUser(${user.id})">Eliminar</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    console.error('Error al obtener usuarios:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    } else {
+        // Si no es Aby, ocultar panel de admin
+        if (adminSection) adminSection.style.display = 'none';
+    }
+}
+
+/**
+ * Maneja la eliminación de mi propia cuenta
+ */
+function handleDeleteSelf() {
+    if (!currentUser) return;
+    if (!confirm("¿Estás seguro de que quieres eliminar TU cuenta? Esta acción no se puede deshacer.")) return;
+
+    deleteUserRequest(currentUser.id, true);
+}
+
+/**
+ * Maneja la eliminación de un usuario (Admin)
+ */
+function handleDeleteUser(id) {
+    if (!confirm("¿Estás seguro de que quieres eliminar este usuario?")) return;
+    deleteUserRequest(id, false);
+}
+
+/**
+ * Petición para eliminar usuario
+ */
+function deleteUserRequest(id, isSelf) {
+    fetch('delete_user.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                if (isSelf) {
+                    alert("Tu cuenta ha sido eliminada.");
+                    navigateTo('login');
+                } else {
+                    renderUsers(); // Actualizar lista
+                }
+            } else {
+                alert("Error al eliminar usuario: " + (data.message || "Desconocido"));
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+/**
+ * Renderiza la vista de usuarios según permisos
+ */
+function renderUsers() {
+    const adminSection = document.getElementById('admin-section');
+    const currentUsernameDisplay = document.getElementById('current-username-display');
+
+    if (currentUsernameDisplay && currentUser) {
+        currentUsernameDisplay.textContent = currentUser.username;
+    }
+
+    // Si es Aby, mostrar panel de admin
+    if (currentUser && currentUser.username === 'Aby') {
+        if (adminSection) adminSection.style.display = 'block';
+
+        const tableBody = document.querySelector('#users-table tbody');
+        if (!tableBody) return;
+
+        fetch('get_users.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    tableBody.innerHTML = data.users.map(user => `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.username}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" onclick="handleDeleteUser(${user.id})">Eliminar</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    console.error('Error al obtener usuarios:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    } else {
+        // Si no es Aby, ocultar panel de admin
+        if (adminSection) adminSection.style.display = 'none';
+    }
+}
+
+/**
+ * Maneja la eliminación de mi propia cuenta
+ */
+function handleDeleteSelf() {
+    if (!currentUser) return;
+    if (!confirm("¿Estás seguro de que quieres eliminar TU cuenta? Esta acción no se puede deshacer.")) return;
+
+    deleteUserRequest(currentUser.id, true);
+}
+
+/**
+ * Maneja la eliminación de un usuario (Admin)
+ */
+function handleDeleteUser(id) {
+    if (!confirm("¿Estás seguro de que quieres eliminar este usuario?")) return;
+    deleteUserRequest(id, false);
+}
+
+/**
+ * Petición para eliminar usuario
+ */
+function deleteUserRequest(id, isSelf) {
+    fetch('delete_user.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                if (isSelf) {
+                    alert("Tu cuenta ha sido eliminada.");
+                    navigateTo('login');
+                } else {
+                    renderUsers(); // Actualizar lista
+                }
+            } else {
+                alert("Error al eliminar usuario: " + (data.message || "Desconocido"));
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+

@@ -47,6 +47,45 @@
                         <button type="button" class="btn btn-mc" id="login-button">INGRESAR</button>
                     </div>
                 </form>
+                <div class="text-center mt-3">
+                    <p style="font-size: 0.8rem;">¿No tienes cuenta?</p>
+                    <button type="button" class="btn btn-sm btn-outline-light"
+                        onclick="toggleLoginRegister('register')">CREAR CUENTA</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA DE REGISTRO (Oculta por defecto) -->
+        <div id="register-view" style="display: none;">
+            <div class="login-card pixel-border">
+                <div class="text-center mb-4">
+                    <img src="Imagenes/Logo.jpg" alt="Logo Redstone" class="img-fluid">
+                </div>
+                <h2 class="mb-4">REGISTRARSE</h2>
+                <form id="register-form">
+                    <div class="mb-3">
+                        <label for="reg-username" class="form-label" style="font-size: 0.9rem;">Nombre de
+                            Usuario:</label>
+                        <input type="text" class="form-control" id="reg-username" placeholder="Elige un usuario"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reg-password" class="form-label" style="font-size: 0.9rem;">Contraseña:</label>
+                        <input type="password" class="form-control" id="reg-password" placeholder="Elige una contraseña"
+                            required>
+                    </div>
+                    <p id="register-error" class="text-danger text-center mt-3"
+                        style="font-family: var(--mc-font-body); font-size: 1.2rem; display: none; color: var(--mc-bright-red) !important;">
+                    </p>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-mc">CREAR CUENTA</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <p style="font-size: 0.8rem;">¿Ya tienes cuenta?</p>
+                    <button type="button" class="btn btn-sm btn-outline-light"
+                        onclick="toggleLoginRegister('login')">INICIAR SESION</button>
+                </div>
             </div>
         </div>
 
@@ -84,6 +123,9 @@
                                     <li><a class="dropdown-item" href="#"
                                             onclick="navigateTo('main', 'mecanismos', 'experto')">Expertos</a></li>
                                 </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="navigateTo('main', 'usuarios')">Usuarios</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" onclick="navigateTo('login')">Cerrar Sesión</a>
@@ -161,6 +203,43 @@
                                 <!-- El contenido de mecanismos se inyectará aquí -->
                             </div>
 
+                            <!-- SUB-VISTA: USUARIOS (Oculta por defecto) -->
+                            <div id="view-usuarios" style="display: none;">
+                                <h2>GESTION DE USUARIOS</h2>
+
+                                <!-- Sección para eliminar mi propia cuenta -->
+                                <div class="card mb-4 pixel-border">
+                                    <div class="card-body text-center">
+                                        <h4>MI CUENTA</h4>
+                                        <p>Estás conectado como: <strong id="current-username-display"></strong></p>
+                                        <button class="btn btn-danger" onclick="handleDeleteSelf()">ELIMINAR MI
+                                            CUENTA</button>
+                                    </div>
+                                </div>
+
+                                <!-- Sección de administración (Solo para Aby) -->
+                                <div id="admin-section" style="display: none;">
+                                    <div class="card pixel-border">
+                                        <div class="card-body">
+                                            <h4>LISTA DE USUARIOS (ADMIN)</h4>
+                                            <div class="table-responsive">
+                                                <table class="table table-dark table-striped" id="users-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Usuario</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Lista de usuarios se inyectará aquí -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
