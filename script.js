@@ -62,6 +62,36 @@ const mecanismosData = [{
         <p>Mecanismo paso a paso: El super horno utiliza un sistema de tolvas para distribuir combustible y items a múltiples hornos a la vez.</p>
         <p>Es perfecto para cocinar grandes cantidades de items de forma rápida y eficiente.</p>
     `
+}, {
+    id: "mecXOR",
+    nombre: "COMPUERTA XOR",
+    nivel: "medio",
+    gifUrl: "Imagenes/XORGIF.mp4",
+    stepImages: [
+        "Imagenes/XOR.jpg",
+        "Imagenes/XOR2.jpg",
+        "Imagenes/XOR3.jpg",
+        "Imagenes/XOR4.jpg"
+    ],
+    descripcion: `
+        <p>Mecanismo paso a paso: La compuerta XOR (O exclusiva) emite una señal solo si una, y solo una, de sus entradas está activa. Si ambas están apagadas o ambas encendidas, la salida es cero.</p>
+        <p>Es fundamental para sistemas binarios y calculadoras en Minecraft.</p>
+    `
+}, {
+    id: "mecTC",
+    nombre: "Tocadiscos Automatico",
+    nivel: "experto",
+    gifUrl: "Imagenes/TCGIF.mp4",
+    stepImages: [
+        "Imagenes/TC.jpg",
+        "Imagenes/TC2.jpg",
+        "Imagenes/TC3.jpg",
+        "Imagenes/TC4.jpg"
+    ],
+    descripcion: `
+        <p>Mecanismo paso a paso: El tocadiscos automatico es un mecanismo que toca discos de vinilo y los reproduce.</p>
+        <p>Perfecto para usar tus discos favoritos en Minecraft.</p>
+    `
 }];
 
 // --- DATOS DE BLOQUES ---
@@ -250,7 +280,6 @@ const bloquesData = [
             <p>El pistón pegajoso funciona igual que el normal, pero puede "pegarse" al bloque que empuja, trayéndolo de vuelta cuando se desactiva. Esencial para puertas automáticas y mecanismos complejos.</p>
         `
     },
-
     {
         id: "bloque14",
         nombre: "TOLVA",
@@ -484,7 +513,16 @@ function renderMecanismos(level) {
     // Filtrar mecanismos por nivel
     let filteredMecanismos = mecanismosData.filter(m => m.nivel === level);
 
-    let accordionHTML = filteredMecanismos.map((m, index) => `
+    let accordionHTML = filteredMecanismos.map((m, index) => {
+        // Determinar si es video o imagen
+        let mediaElement = '';
+        if (m.gifUrl.endsWith('.mp4')) {
+            mediaElement = `<video src="${m.gifUrl}" autoplay loop muted playsinline class="img-fluid"></video>`;
+        } else {
+            mediaElement = `<img src="${m.gifUrl}" alt="GIF del Mecanismo ${m.nombre}" class="img-fluid">`;
+        }
+
+        return `
         <div class="accordion-item">
             <h2 class="accordion-header" id="heading-${m.id}">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${m.id}" aria-expanded="false" aria-controls="collapse-${m.id}">
@@ -499,7 +537,7 @@ function renderMecanismos(level) {
                             ${m.descripcion}
                         </div>
                         <div class="col-md-4">
-                            <img src="${m.gifUrl}" alt="GIF del Mecanismo ${m.nombre}" class="img-fluid">
+                            ${mediaElement}
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -511,7 +549,7 @@ function renderMecanismos(level) {
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 
     container.innerHTML = `
         <h2>${title}</h2>
@@ -691,92 +729,3 @@ function deleteUserRequest(id, isSelf) {
         })
         .catch(error => console.error('Error:', error));
 }
-
-/**
- * Renderiza la vista de usuarios según permisos
- */
-function renderUsers() {
-    const adminSection = document.getElementById('admin-section');
-    const currentUsernameDisplay = document.getElementById('current-username-display');
-
-    if (currentUsernameDisplay && currentUser) {
-        currentUsernameDisplay.textContent = currentUser.username;
-    }
-
-    // Si es Aby, mostrar panel de admin
-    if (currentUser && currentUser.username === 'Aby') {
-        if (adminSection) adminSection.style.display = 'block';
-
-        const tableBody = document.querySelector('#users-table tbody');
-        if (!tableBody) return;
-
-        fetch('get_users.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    tableBody.innerHTML = data.users.map(user => `
-                        <tr>
-                            <td>${user.id}</td>
-                            <td>${user.username}</td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="handleDeleteUser(${user.id})">Eliminar</button>
-                            </td>
-                        </tr>
-                    `).join('');
-                } else {
-                    console.error('Error al obtener usuarios:', data.message);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    } else {
-        // Si no es Aby, ocultar panel de admin
-        if (adminSection) adminSection.style.display = 'none';
-    }
-}
-
-/**
- * Maneja la eliminación de mi propia cuenta
- */
-function handleDeleteSelf() {
-    if (!currentUser) return;
-    if (!confirm("¿Estás seguro de que quieres eliminar TU cuenta? Esta acción no se puede deshacer.")) return;
-
-    deleteUserRequest(currentUser.id, true);
-}
-
-/**
- * Maneja la eliminación de un usuario (Admin)
- */
-function handleDeleteUser(id) {
-    if (!confirm("¿Estás seguro de que quieres eliminar este usuario?")) return;
-    deleteUserRequest(id, false);
-}
-
-/**
- * Petición para eliminar usuario
- */
-function deleteUserRequest(id, isSelf) {
-    fetch('delete_user.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: id })
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                if (isSelf) {
-                    alert("Tu cuenta ha sido eliminada.");
-                    navigateTo('login');
-                } else {
-                    renderUsers(); // Actualizar lista
-                }
-            } else {
-                alert("Error al eliminar usuario: " + (data.message || "Desconocido"));
-            }
-        })
-        .catch(error => console.error('Error:', error));
-}
-
-
