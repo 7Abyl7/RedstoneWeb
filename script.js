@@ -79,7 +79,7 @@ const mecanismosData = [{
     `
 }, {
     id: "mecTC",
-    nombre: "Tocadiscos Automatico",
+    nombre: "TOCADISCOS AUTOMATICO",
     nivel: "experto",
     gifUrl: "Imagenes/TCGIF.mp4",
     stepImages: [
@@ -93,6 +93,11 @@ const mecanismosData = [{
         <p>Perfecto para usar tus discos favoritos en Minecraft.</p>
     `
 }];
+
+
+
+
+
 
 // --- DATOS DE BLOQUES ---
 
@@ -308,15 +313,15 @@ const bloquesData = [
     }
 ];
 
-// --- LÓGICA DE NAVEGACIÓN ---
+// --- LOGICA DE NAVEGACION ---
 
 let currentPage = '';
 let currentSubPage = '';
 let currentUser = null; // Almacena el usuario logueado: { id, username }
 
-/**
- *  Manejar el intento de login
- */
+
+//  Manejar el intento de login
+
 function handleLogin() {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
@@ -340,7 +345,6 @@ function handleLogin() {
                 currentUser = data.user; // Guardar usuario logueado
                 navigateTo('main'); // Navega a la página principal si es correcto
             } else {
-                // Muestra error si es incorrecto
                 if (errorElement) {
                     errorElement.textContent = data.message || "Usuario o contraseña incorrectos.";
                     errorElement.style.display = 'block';
@@ -356,9 +360,9 @@ function handleLogin() {
         });
 }
 
-/**
- * Alternar entre Login y Registro
- */
+
+//Alternar entre Login y Registro
+
 function toggleLoginRegister(view) {
     const loginView = document.getElementById('login-view');
     const registerView = document.getElementById('register-view');
@@ -377,9 +381,9 @@ function toggleLoginRegister(view) {
     }
 }
 
-/**
- * Manejar el registro de usuario
- */
+
+// Manejar el registro de usuario
+
 function handleRegister(event) {
     event.preventDefault();
     const usernameInput = document.getElementById('reg-username');
@@ -457,9 +461,7 @@ function navigateTo(page, subPage = 'home', param = null) {
     currentPage = page;
 }
 
-/**
- * Muestra la sub-página correcta dentro del main-view
- */
+// Muestra la sub-página correcta dentro del main-view
 function navigateToSubPage(subPage, param) {
     const viewHome = document.getElementById('view-home');
     const viewBloques = document.getElementById('view-bloques');
@@ -483,7 +485,7 @@ function navigateToSubPage(subPage, param) {
     } else if (subPage === 'mecanismos') {
         if (viewMecanismos) {
             viewMecanismos.style.display = 'block';
-            renderMecanismos(param); // Renderizar contenido dinámico
+            renderMecanismos(param);
         }
     } else if (subPage === 'usuarios') {
         if (viewUsuarios) {
@@ -498,9 +500,7 @@ function navigateToSubPage(subPage, param) {
     updateSidebarActiveState(subPage, param);
 }
 
-/**
- * Renderiza el contenido de mecanismos dinámicamente
- */
+// Renderiza el contenido de losmecanismos
 function renderMecanismos(level) {
     const container = document.getElementById('view-mecanismos');
     if (!container) return;
@@ -521,7 +521,7 @@ function renderMecanismos(level) {
         } else {
             mediaElement = `<img src="${m.gifUrl}" alt="GIF del Mecanismo ${m.nombre}" class="img-fluid">`;
         }
-
+        //Todo lo del Acordeon 
         return `
         <div class="accordion-item">
             <h2 class="accordion-header" id="heading-${m.id}">
@@ -559,9 +559,7 @@ function renderMecanismos(level) {
     `;
 }
 
-/**
- * Renderiza el contenido de bloques dinámicamente
- */
+// Renderiza el contenido de bloques 
 function renderBloques() {
     const container = document.getElementById('view-bloques');
     if (!container) return;
@@ -602,9 +600,7 @@ function renderBloques() {
     `;
 }
 
-/**
- * Resalta el ítem activo en el sidebar
- */
+// Resalta el ítem activo en el sidebar
 function updateSidebarActiveState(subPage, param) {
     const sidebarLinks = document.querySelectorAll('.sidebar-nav .list-group-item');
     sidebarLinks.forEach(link => {
@@ -625,7 +621,6 @@ function updateSidebarActiveState(subPage, param) {
     });
 }
 
-// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     // Listener para el botón de login
     const loginButton = document.getElementById('login-button');
@@ -643,9 +638,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navigateTo('login');
 });
 
-/**
- * Renderiza la vista de usuarios según permisos
- */
+// Renderiza la vista de usuarios según permisos
 function renderUsers() {
     const adminSection = document.getElementById('admin-section');
     const currentUsernameDisplay = document.getElementById('current-username-display');
@@ -654,7 +647,7 @@ function renderUsers() {
         currentUsernameDisplay.textContent = currentUser.username;
     }
 
-    // Si es Aby, mostrar panel de admin
+    // Si es Aby mostrar panel de admin
     if (currentUser && currentUser.username === 'Aby') {
         if (adminSection) adminSection.style.display = 'block';
 
@@ -685,9 +678,7 @@ function renderUsers() {
     }
 }
 
-/**
- * Maneja la eliminación de mi propia cuenta
- */
+// Maneja la eliminación de cuenta
 function handleDeleteSelf() {
     if (!currentUser) return;
     if (!confirm("¿Estás seguro de que quieres eliminar TU cuenta? Esta acción no se puede deshacer.")) return;
@@ -695,17 +686,13 @@ function handleDeleteSelf() {
     deleteUserRequest(currentUser.id, true);
 }
 
-/**
- * Maneja la eliminación de un usuario (Admin)
- */
+// Maneja la eliminación de un usuario (Admin)
 function handleDeleteUser(id) {
     if (!confirm("¿Estás seguro de que quieres eliminar este usuario?")) return;
     deleteUserRequest(id, false);
 }
 
-/**
- * Petición para eliminar usuario
- */
+// Petición para eliminar usuario
 function deleteUserRequest(id, isSelf) {
     fetch('delete_user.php', {
         method: 'POST',
