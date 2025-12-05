@@ -18,7 +18,7 @@ if (isset($data->username) && isset($data->password)) {
     $user = $data->username;
     $pass = $data->password;
 
-    // Check if user already exists
+    // Ver si existe el usuario 
     $check = $conn->prepare("SELECT id FROM users WHERE username = ?");
     $check->bind_param("s", $user);
     $check->execute();
